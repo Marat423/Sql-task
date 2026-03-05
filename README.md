@@ -8,9 +8,7 @@
 
 2 в каком месяце года выручка от пользователей в возрастном диапазоне 35+ самая большая
 
-3 какой товар обеспечивает наибольший вклад в выручку за последний год
-
-4 топ-5 товаров по выручке и их доля в общей выручке за любой год
+3 топ-5 товаров по выручке и их доля в общей выручке за любой год
 
 ## 1
 ```
@@ -34,6 +32,7 @@ SELECT AVG(a.summa)
   GROUP BY strftime('%Y-%m', p.date)
   ) AS a 
 ```
+
 ## 2
 ```
 SELECT a.product
@@ -51,22 +50,6 @@ SELECT a.product
       LIMIT 1;
    ```         
 
-## 3
-```
-SELECT top_items.itemId, INTEGER(top_items.amount*100 /  (SELECT SUM(i.price)
-                                                                            FROM Items i
-                                                                            JOIN Purchases p
-                                                                            ON i.itemId = p.itemId))
-                    FROM (SELECT i.itemId, SUM(i.price) AS amount
-                            FROM  Items i
-                            JOIN  Purchases p
-                              ON  i.itemId = p.itemId
-                            WHERE strftime('%Y', p.date) = '{year}'
-                            GROUP BY i.itemId
-                            ORDER BY amount DESC
-                            LIMIT 5) AS top_items
-           
-```
 ## 4
 ```
 SELECT 
