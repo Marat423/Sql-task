@@ -12,7 +12,7 @@
 4 топ-3 товаров по выручке и их доля в общей выручке за любой год
 
 ## 1
-'''
+```
 SELECT AVG(a.summa)
    FROM (
    SELECT SUM(pr.cost) AS summa, strftime('%Y-%m', p.date) AS date
@@ -32,9 +32,9 @@ SELECT AVG(a.summa)
   WHERE p.customerId IN (SELECT c.customerId FROM Customers c WHERE c.age BETWEEN 30 and 40)
   GROUP BY strftime('%Y-%m', p.date)
   ) AS a 
-'''
+```
 ## 2
-'''
+```
 SELECT a.product
    FROM (
    SELECT SUM(pr.cost) as summa, pr.productIdid as product
@@ -48,10 +48,10 @@ SELECT a.product
         ) AS a
       ORDER BY a.summa DESC
       LIMIT 1;
-   '''         
+   ```         
 
 ## 3
-'''
+```
 SELECT top_items.itemId, INTEGER(top_items.amount*100 /  (SELECT SUM(i.price)
                                                                             FROM Items i
                                                                             JOIN Purchases p
@@ -65,9 +65,9 @@ SELECT top_items.itemId, INTEGER(top_items.amount*100 /  (SELECT SUM(i.price)
                             ORDER BY amount DESC
                             LIMIT 5) AS top_items
            
-'''
+```
 ## 4
-'''
+```
 SELECT 
     top_products.productidId, 
     CAST(top_products.amount * 100 / (
@@ -83,4 +83,5 @@ FROM (
     GROUP BY pr.productIdId
     ORDER BY amount DESC
     LIMIT 5
-) AS top_products; '''
+) AS top_products; 
+```
