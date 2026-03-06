@@ -50,7 +50,7 @@ SELECT a.product
       LIMIT 1;
    ```         
 
-## 4
+## 3
 ```
 SELECT 
     top_products.productidId, 
